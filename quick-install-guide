@@ -1,0 +1,19 @@
+cfdisk/fdisk, swap=512M,  about 250M for boot if needed, and root is rest of disk
+lsblk
+# mkfs.ext4 /dev/root_partition
+# mkswap /dev/swap_partition
+# mount /dev/root_partition /mnt
+# swapon /dev/swap_partition
+reflector 
+# pacstrap /mnt base linux linux-firmware base-devel nano network-manager grub amd-ucode intel-ucode 
+# genfstab -U /mnt >> /mnt/etc/fstab
+# arch-chroot /mnt
+# hwclock --systohc
+#nano /etc/locale.gen       uncomment en_US.UTF-8 UTF-8
+#nano /etc/locale.conf      write LANG=en_US.UTF-8
+#nano /etc/hostname         write hostname
+#passwd 
+# grub-install --target=i386-pc /dev/sdX
+# grub-mkconfig -o /boot/grub/grub.cfg
+exit
+umount -R /mnt
